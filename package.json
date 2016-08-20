@@ -1,0 +1,19 @@
+{
+  "name": "3denj",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nomaed/3denj.git"
+  },
+  "author": "Boris Aranovich <nomaed@gmail.com> (https://github.com/nomaed)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nomaed/3denj/issues"
+  },
+  "homepage": "https://github.com/nomaed/3denj#readme"
+}
