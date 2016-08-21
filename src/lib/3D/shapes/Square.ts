@@ -1,11 +1,10 @@
-import { Shape3D } from './Shape3D';
-import { Vertex } from './Vertex';
-import { Triangle } from './Triangle';
+import { Vertex } from '../Vertex';
+import { Face } from '../Face';
+import { Shape } from './Shape';
 
 type TSquare = [Vertex, Vertex, Vertex, Vertex];
 
-export class Square extends Shape3D {
-  private triangles: Array<Triangle> = [];
+export class Square extends Shape {
 
   constructor(v1: Vertex, v2: Vertex, v3: Vertex, v4: Vertex);
   constructor(vertices: TSquare);
@@ -34,9 +33,9 @@ export class Square extends Shape3D {
     }
 
     // Map vertices into 2 triangles
-    this.triangles = [
-      new Triangle(this.vertices[0], this.vertices[1], this.vertices[2]),
-      new Triangle(this.vertices[0], this.vertices[2], this.vertices[3])
+    this.faces = [
+      new Face(this.vertices[0], this.vertices[1], this.vertices[2]),
+      new Face(this.vertices[0], this.vertices[2], this.vertices[3])
     ];
   }
 }
