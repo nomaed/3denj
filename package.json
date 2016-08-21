@@ -4,7 +4,9 @@
   "description": "",
   "main": "dist/main.js",
   "scripts": {
-    "test": "test.js"
+    "prebuild": "npm i",
+    "build": "node_modules/.bin/tsc",
+    "test": "echo 'Tests are not implemented'"
   },
   "repository": {
     "type": "git",
@@ -15,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/nomaed/3denj/issues"
   },
-  "homepage": "https://github.com/nomaed/3denj#readme"
+  "homepage": "https://github.com/nomaed/3denj#readme",
+  "devDependencies": {
+    "typescript": "^1.8.10"
+  }
 }
