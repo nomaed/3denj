@@ -61,3 +61,7 @@ function project(projType: ProjectionType, vertex: Vertex): Vector2D {
       return new Vector2D(r * vertex.position.x, r * vertex.position.z);
   }
 }
+
+export default function run() {
+  console.log('Hello world!');
+}

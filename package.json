@@ -2,7 +2,7 @@
   "name": "3denj",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/main.js",
+  "main": "index.js",
   "scripts": {
     "prebuild": "npm i",
     "build": "node_modules/.bin/tsc",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/nomaed/3denj#readme",
   "devDependencies": {
     "typescript": "^1.8.10"
+  },
+  "dependencies": {
+    "systemjs": "^0.19.36"
   }
 }
