@@ -1,0 +1,49 @@
+<html>
+
+<head>
+  <script src="node_modules/systemjs/dist/system.js"></script>
+  <script src="node_modules/typescript/lib/typescript.js"></script>
+  <script>
+    // set our baseURL reference path
+    SystemJS.config({
+      baseURL: '/3denj',
+      transpiler: 'typescript',
+      packages: {
+        src: {
+          defaultExtension: 'ts'
+        }
+      }
+    });
+
+    let sysApp;
+    // loads /js/main.js
+    SystemJS
+      .import('src/main.ts')
+      .then(app => {
+        sysApp = app;
+        app.Main(document.getElementById('cnv'))
+      })
+      .catch(e => console.error(e));
+
+    function stopAnimation() {
+      sysApp.stop();
+    }
+  </script>
+  <style>
+    body {
+      background-color: #ddd;
+    }
+
+    canvas {
+      background-color: white;
+      border: 1px solid #888;
+    }
+  </style>
+</head>
+
+<body>
+  <button onClick="stopAnimation()">Stop</button><br/>
+  <canvas id="cnv" width="800" height="600"></canvas>
+</body>
+
+</html>

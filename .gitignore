@@ -1,5 +1,6 @@
-/.vscode/
-/built/
-/out/
-/node_modules/
-/npm-debug.log
+.vscode
+built
+www/built
+out
+node_modules/
+npm-debug.log

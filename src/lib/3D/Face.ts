@@ -17,7 +17,7 @@ export class Face {
         throw new TypeError('Invalid vertices, not a Vertex');
       }
       this.vertices = [
-        args[0], args[1], args[2], args[3]
+        args[0], args[1], args[2]
       ];
     } else if (args.length === 1) {
       const triangle = <TFace>args[0];

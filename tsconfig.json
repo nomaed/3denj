@@ -4,8 +4,7 @@
     "target": "es6",
     "noImplicitAny": true,
     "sourceMap": true,
-    "outDir": "built",
-    "outFile": "out/index.js"
+    "outDir": "www/built"
   },
   "files": [
     "src/main.ts"

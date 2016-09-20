@@ -12,6 +12,23 @@ enum ProjectionType {
   Perspective
 }
 
+let timerVar: number;
+
+export function Main(canvas: HTMLCanvasElement) {
+  const canvas2d = canvas.getContext('2d');
+  canvas2d.strokeStyle = 'rgba(0, 0, 0, 0.3)';
+  canvas2d.fillStyle = 'rgba(0, 150, 255, 0.3)';
+
+  timerVar = setInterval(() => {
+    cube.vertices.forEach(vertex => vertex.translate(new Vector(1, 1, 1)));
+    render([cube], canvas2d, canvas.width / 2, canvas.height / 2);
+  }, 10);
+}
+
+export function stop() {
+  clearTimeout(timerVar);
+}
+
 /**
  * Renders shapes to canvas
  * @param {Shape[]} objects List of Shapes to render
@@ -19,8 +36,9 @@ enum ProjectionType {
  * @param {number}  dx      Canvas width (px)
  * @param {number}  dy      Canvas height (px)
  */
-function render(objects: Shape[], ctx: any, dx: number, dy: number): void {
-  const projType = ProjectionType.Orthographic;
+function render(objects: Shape[], ctx: CanvasRenderingContext2D, dx: number, dy: number): void {
+  const projType = ProjectionType.Perspective;
+  ctx.clearRect(0, 0, 2 * dx, 2 * dy);
 
   // For each object
   for (let i = 0, n_obj = objects.length; i < n_obj; ++i) {
@@ -36,7 +54,7 @@ function render(objects: Shape[], ctx: any, dx: number, dy: number): void {
 
       // Draw the other vertices
       for (let k = 1, n_vertices = face.vertices.length; k < n_vertices; ++k) {
-        P = project(projType, face[k]);
+        P = project(projType, face.vertices[k]);
         ctx.lineTo(P.x + dx, -P.y + dy);
       }
 
@@ -55,13 +73,9 @@ function project(projType: ProjectionType, vertex: Vertex): Vector2D {
 
     case ProjectionType.Perspective:
       // Distance between the camera and the plane
-      const dist = 200;
+      const dist = 50;
       const r = dist / vertex.position.y;
 
       return new Vector2D(r * vertex.position.x, r * vertex.position.z);
   }
-}
-
-export default function run() {
-  console.log('Hello world!');
 }
