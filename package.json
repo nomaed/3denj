@@ -19,7 +19,8 @@
   },
   "homepage": "https://github.com/nomaed/3denj#readme",
   "devDependencies": {
-    "typescript": "^1.8.10"
+    "systemjs": "^0.19.38",
+    "typescript": "^2.0.3"
   },
   "dependencies": {
     "systemjs": "^0.19.37"

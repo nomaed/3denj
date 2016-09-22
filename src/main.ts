@@ -16,6 +16,7 @@ let timerVar: number;
 
 export function Main(canvas: HTMLCanvasElement) {
   const canvas2d = canvas.getContext('2d');
+  if (!canvas2d) return;
   canvas2d.strokeStyle = 'rgba(0, 0, 0, 0.3)';
   canvas2d.fillStyle = 'rgba(0, 150, 255, 0.3)';
 
