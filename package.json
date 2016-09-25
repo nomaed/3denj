@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prebuild": "npm i",
-    "build": "node_modules/.bin/tsc",
-    "test": "echo 'Tests are not implemented'"
+    "prepublish": "npm run build",
+    "build": "npm run lint && tsc",
+    "test": "echo 'Tests are not implemented'",
+    "lint": "tslint --project tsconfig.json --config tslint.json --format verbose"
   },
   "repository": {
     "type": "git",
@@ -20,9 +21,9 @@
   "homepage": "https://github.com/nomaed/3denj#readme",
   "devDependencies": {
     "systemjs": "^0.19.38",
-    "typescript": "^2.0.3"
+    "typescript": "^2.0.3",
+    "tslint": "^3.15.1"
   },
   "dependencies": {
-    "systemjs": "^0.19.37"
   }
 }

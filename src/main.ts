@@ -1,11 +1,11 @@
-import { Vector } from './lib/3D/Vector';
-import { Vertex } from './lib/3D/Vertex';
+import { Vector3D } from './lib/3D/Vector3D';
+import { Vertex3D } from './lib/3D/Vertex3D';
 import { Face } from './lib/3D/Face';
 import { Cube } from './lib/3D/shapes/Cube';
 import { Shape } from './lib/3D/shapes/Shape';
 import { Vector2D } from './lib/2D/Vector2D';
 
-const cube = new Cube(new Vector(0, 0, 0), 200);
+const cube = new Cube(new Vector3D(0, 0, 0), 200);
 
 enum ProjectionType {
   Orthographic,
@@ -21,7 +21,7 @@ export function Main(canvas: HTMLCanvasElement) {
   canvas2d.fillStyle = 'rgba(0, 150, 255, 0.3)';
 
   timerVar = setInterval(() => {
-    cube.vertices.forEach(vertex => vertex.translate(new Vector(1, 1, 1)));
+    cube.vertices.forEach(vertex => vertex.translate(new Vector3D(1, 1, 1)));
     render([cube], canvas2d, canvas.width / 2, canvas.height / 2);
   }, 10);
 }
@@ -67,7 +67,7 @@ function render(objects: Shape[], ctx: CanvasRenderingContext2D, dx: number, dy:
   }
 }
 
-function project(projType: ProjectionType, vertex: Vertex): Vector2D {
+function project(projType: ProjectionType, vertex: Vertex3D): Vector2D {
   switch (projType) {
     case ProjectionType.Orthographic:
       return new Vector2D(vertex.position.x, vertex.position.z);

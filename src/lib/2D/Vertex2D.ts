@@ -3,7 +3,7 @@ import { Vector2D } from './Vector2D';
 export class Vertex2D {
   public position: Vector2D;
 
-  constructor(position: Vector);
+  constructor(position: Vector2D);
   constructor(x: number, y: number);
   constructor(...args: any[]) {
     if (!args || !Array.isArray(args)) {
@@ -18,7 +18,7 @@ export class Vertex2D {
       if (args.some(arg => typeof arg !== 'number')) {
         throw new TypeError('Invalid coordinate, component not a number');
       }
-      this.position = new Vector(args[0], args[1]);
+      this.position = new Vector2D(args[0], args[1]);
     } else {
       throw new TypeError('Invalid vertex arguments');
     }

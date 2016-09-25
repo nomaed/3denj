@@ -1,12 +1,12 @@
-import { Vertex } from '../Vertex';
+import { Vertex3D } from '../Vertex3D';
 import { Face } from '../Face';
 import { Shape } from './Shape';
 
-type TSquare = [Vertex, Vertex, Vertex, Vertex];
+type TSquare = [Vertex3D, Vertex3D, Vertex3D, Vertex3D];
 
 export class Square extends Shape {
 
-  constructor(v1: Vertex, v2: Vertex, v3: Vertex, v4: Vertex);
+  constructor(v1: Vertex3D, v2: Vertex3D, v3: Vertex3D, v4: Vertex3D);
   constructor(vertices: TSquare);
   constructor(...args: any[]) {
     super();
@@ -16,7 +16,7 @@ export class Square extends Shape {
       throw new TypeError('Square cannot be created without vertices');
     }
     if (args.length === 4) {
-      if (args.some(vertex => !(vertex instanceof Vertex))) {
+      if (args.some(vertex => !(vertex instanceof Vertex3D))) {
         throw new TypeError('Invalid vertices provided');
       }
       this.vertices = [

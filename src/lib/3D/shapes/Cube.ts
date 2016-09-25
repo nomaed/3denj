@@ -1,24 +1,24 @@
-import { Vector } from '../Vector';
+import { Vector3D } from '../Vector3D';
 import { Face } from '../Face';
 import { Shape } from './Shape';
-import { Vertex } from '../Vertex';
+import { Vertex3D } from '../Vertex3D';
 import { Square } from './Square';
 
 export class Cube extends Shape {
-  constructor(center: Vector, size: number) {
+  constructor(center: Vector3D, size: number) {
     super();
 
     const d = size / 2;
 
     this.vertices = [
-      new Vertex(center.x - d, center.y - d, center.z + d),
-      new Vertex(center.x - d, center.y - d, center.z - d),
-      new Vertex(center.x + d, center.y - d, center.z - d),
-      new Vertex(center.x + d, center.y - d, center.z + d),
-      new Vertex(center.x + d, center.y + d, center.z + d),
-      new Vertex(center.x + d, center.y + d, center.z - d),
-      new Vertex(center.x - d, center.y + d, center.z - d),
-      new Vertex(center.x - d, center.y + d, center.z + d)
+      new Vertex3D(center.x - d, center.y - d, center.z + d),
+      new Vertex3D(center.x - d, center.y - d, center.z - d),
+      new Vertex3D(center.x + d, center.y - d, center.z - d),
+      new Vertex3D(center.x + d, center.y - d, center.z + d),
+      new Vertex3D(center.x + d, center.y + d, center.z + d),
+      new Vertex3D(center.x + d, center.y + d, center.z - d),
+      new Vertex3D(center.x - d, center.y + d, center.z - d),
+      new Vertex3D(center.x - d, center.y + d, center.z + d)
     ];
 
     this.faces = [
