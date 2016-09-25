@@ -5,7 +5,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "sourceMap": true,
-    "outDir": "www/built"
+    "outDir": "built"
   },
   "files": [
     "src/main.ts"
