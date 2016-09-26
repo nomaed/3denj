@@ -1,8 +1,7 @@
 import { Vector3D } from "../Vector3D";
 import { Shape } from "./Shape";
+import { Face } from "./Face";
 import { Vertex3D } from "../Vertex3D";
-import { Square } from "./Square";
-import { Face } from "../Face";
 import { FaceColor } from "../../color/FaceColor";
 
 export class Pyramid extends Shape {
@@ -19,14 +18,11 @@ export class Pyramid extends Shape {
     this.setColor(color || new FaceColor());
     this.vertices = [ldf, ldb, rdb, rdf, tip];
     this.faces = [
-      // Base
-      new Face(ldb, rdb, rdf, this.color),
-      new Face(ldb, ldf, rdf, this.color),
-      // Faces
-      new Face(ldb, rdb, tip, this.color), // back
-      new Face(ldf, rdf, tip, this.color), // front
-      new Face(ldb, ldf, tip, this.color), // left
-      new Face(rdb, rdf, tip, this.color), // right
+      new Face(this.color, ldb, rdb, rdf, ldf), // base
+      new Face(this.color, ldb, rdb, tip), // back
+      new Face(this.color, ldf, rdf, tip), // front
+      new Face(this.color, ldb, ldf, tip), // left
+      new Face(this.color, rdb, rdf, tip), // right
     ];
 
   }

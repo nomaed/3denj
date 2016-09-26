@@ -38,20 +38,58 @@
       background-color: white;
       border: 1px solid #888;
     }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    td {
+      padding: 4px;
+    }
+
+    .controls {
+      float: right;
+      background-color: #eee;
+    }
+
+    .controls button {
+      font-size: 30pt;
+      width: 50px;
+      height: 50px;
+    }
   </style>
 </head>
 
 <body>
+  <div class="controls">
+    <table>
+      <tr>
+        <td><button>↶</button></td>
+        <td><button onClick="sysApp.rotate(0, -1)">↑</button></td>
+        <td><button>↷</button></td>
+      </tr>
+      <tr>
+        <td><button onClick="sysApp.rotate(-1, 0)">←</button></td>
+        <td></td>
+        <td><button onClick="sysApp.rotate(1, 0)">→</button></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><button onClick="sysApp.rotate(0, 1)">↓</button></td>
+        <td></td>
+      </tr>
+      </table>
+  </div>
   <div>
     <button onClick="stopAnimation()">Stop</button>
   </div>
 
   <div>
-  <canvas id="cnv" width="800" height="600"></canvas>
+    <canvas id="cnv" width="800" height="600"></canvas>
   </div>
 
   <div>
-    <input id="cam-dist" type="range" min="0" max="1000" defaultValue="200" onChange="sysApp.updateDist()" style="width: 800px"/>
+    Camera: <input id="cam-dist" type="range" min="0" max="1000" value="200" onChange="sysApp.updateDist()" style="width: 740px" />
   </div>
 
 </body>

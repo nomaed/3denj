@@ -1,13 +1,12 @@
-import { Square } from "./Square";
 import { Shape } from "./Shape";
-import { Face } from "../Face";
+import { Face } from "./Face";
 import { Vector3D } from "../Vector3D";
 import { Vertex3D } from "../Vertex3D";
 import { FaceColor } from "../../color/FaceColor";
 
 export class Cube extends Shape {
   constructor(center: Vector3D, size: number, color?: FaceColor) {
-    super();
+    super(center);
 
     const d = size / 2;
     const ldf = new Vertex3D(center.x - d, center.y - d, center.z + d); // left  down front
@@ -22,12 +21,12 @@ export class Cube extends Shape {
     this.setColor(color || new FaceColor());
     this.vertices = [ldf, ldb, rdb, rdf, ruf, rub, lub, luf];
     this.faces = [
-      ...new Square(ldf, ldb, rdb, rdf, this.color).faces,
-      ...new Square(rdf, rdb, rub, ruf, this.color).faces,
-      ...new Square(ruf, rub, lub, luf, this.color).faces,
-      ...new Square(luf, lub, ldb, ldf, this.color).faces,
-      ...new Square(luf, ldf, rdf, ruf, this.color).faces,
-      ...new Square(ldb, lub, rub, rdb, this.color).faces,
+      new Face(this.color, ldf, ldb, rdb, rdf),
+      new Face(this.color, rdf, rdb, rub, ruf),
+      new Face(this.color, ruf, rub, lub, luf),
+      new Face(this.color, luf, lub, ldb, ldf),
+      new Face(this.color, luf, ldf, rdf, ruf),
+      new Face(this.color, ldb, lub, rub, rdb),
     ];
   }
 }

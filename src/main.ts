@@ -1,6 +1,6 @@
 import { Vector3D } from "./lib/3D/Vector3D";
 import { Vertex3D } from "./lib/3D/Vertex3D";
-import { Face } from "./lib/3D/Face";
+import { Face } from "./lib/3D/shapes/Face";
 import { Cube } from "./lib/3D/shapes/Cube";
 import { Shape } from "./lib/3D/shapes/Shape";
 import { Vector2D } from "./lib/2D/Vector2D";
@@ -18,31 +18,39 @@ const PROJECTION = ProjectionType.Perspective;
 let timerVar: number;
 let cameraDistance: number = 200;
 
+let dx: number;
+let dy: number;
+let center: Vector3D;
+let shapes: Array<Shape>;
+let canvas2d: CanvasRenderingContext2D;
+
 export function Main(canvas: HTMLCanvasElement) {
-  const canvas2d = canvas.getContext("2d");
-  if (!canvas2d) {
+  let canvasObj = canvas.getContext("2d");
+  if (!canvasObj) {
     throw new Error("Unable to create a canvas");
+  } else {
+    canvas2d = canvasObj;
+    console.log("canvas: %d x %d", canvas.width, canvas.height);
   }
 
-  const dx = canvas.width / 2;
-  const dy = canvas.height / 2;
-  const center = new Vector3D(0, 11 * dy / 10, 0);
+  dx = canvas.width / 2;
+  dy = canvas.height / 2;
+  center = new Vector3D(0, 1000, 0);
 
-  const cube = new Cube(center, 100, new FaceColor(new RGBA(255, 128, 0, .3), new RGBA(128, 0, 0, .3)));
-  const pyr = new Pyramid(center, 200, new FaceColor(new RGBA(0, 128, 255, .3), new RGBA(0, 0, 128, .3)));
-  const shapes = [cube, pyr];
+  const cube = new Cube(center, 200, new FaceColor(new RGBA(255, 128, 0, .3), new RGBA(128, 0, 0, .3)));
+  const pyr = new Pyramid(Vector3D.add(center, new Vector3D(0, 0, 200)), 200, new FaceColor(new RGBA(0, 128, 255, .3), new RGBA(0, 0, 128, .3)));
 
-  const trVector = new Vector3D(.5, .5, .5);
+  shapes = [cube, pyr];
 
-  console.log("canvas: %d x %d", canvas.width, canvas.height);
-
-  timerVar = setInterval(() => {
-    shapes.forEach(shape => {
-      // shape.translate(trVector);
-      shape.rotate(center, Math.PI / 720, -Math.PI / 720);
-    });
-    render(shapes, canvas2d, dx, dy);
-  }, 10);
+  // const trVector = new Vector3D(.5, .5, .5);
+  // timerVar = setInterval(() => {
+  //   shapes.forEach(shape => {
+  //     // shape.translate(trVector);
+  //     shape.rotate(center, Math.PI / (720 * 2), -Math.PI / (720 * 3));
+  //   });
+  //   render(shapes, canvas2d, dx, dy);
+  // }, 10);
+  draw();
 }
 
 export function stop() {
@@ -53,6 +61,26 @@ export function updateDist() {
   const el = <HTMLInputElement>document.getElementById("cam-dist");
   if (!el) return;
   cameraDistance = Number(el.value);
+  draw();
+}
+
+export function rotate(theta: number, phi: number) {
+  shapes.forEach(shape => {
+    shape.rotate(center, Math.PI / 45  * theta, Math.PI / 45 * phi);
+  });
+  draw();
+}
+
+export function objectY(y: number) {
+  shapes.forEach(shape => {
+    shape.vertices;
+  });
+  draw();
+}
+
+
+function draw() {
+  render(shapes, canvas2d!, dx, dy);
 }
 
 /**
@@ -94,12 +122,12 @@ function render(objects: Shape[], ctx: CanvasRenderingContext2D, dx: number, dy:
 function project(projType: ProjectionType, vertex: Vertex3D): Vector2D {
   switch (projType) {
     case ProjectionType.Orthographic:
-      return new Vector2D(vertex.position.x, vertex.position.z);
+      return new Vector2D(vertex.x, vertex.z);
 
     case ProjectionType.Perspective:
       // Distance between the camera and the plane
-      const r = cameraDistance / vertex.position.y;
+      const r = cameraDistance / vertex.y;
 
-      return new Vector2D(r * vertex.position.x, r * vertex.position.z);
+      return new Vector2D(r * vertex.x, r * vertex.z);
   }
 }

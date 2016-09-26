@@ -1,40 +1,52 @@
 export class Vector3D {
-  constructor(public x: number,
-    public y: number,
-    public z: number) { }
+  public x: number;
+  public y: number;
+  public z: number;
 
-  public translate(x: number, y: number, z: number): void;
-  public translate(trVector: Vector3D): void;
-  public translate(...args: any[]) {
-    if (args.length === 1 && args[0] instanceof Vector3D) {
-      const trVector = args[0];
-      this.x += trVector.x;
-      this.y += trVector.y;
-      this.z += trVector.z;
-    } else if (args.length === 3 && [args[0], args[1], args[2]].every(arg => typeof arg === "number")) {
-      this.x += args[0];
-      this.y += args[1];
-      this.z += args[2];
-    } else {
-      throw TypeError("Invalid translation parameters, must be a Vector3D or x, y & z values");
+  constructor(x: number, y: number, z: number) {
+    if (typeof x !== "number") {
+      throw new TypeError("X is not a number");
     }
+    if (typeof y !== "number") {
+      throw new TypeError("Y is not a number");
+    }
+    if (typeof z !== "number") {
+      throw new TypeError("Z is not a number");
+    }
+    this.x = x;
+    this.y = y;
+    this.z = z;
   }
 
-  public rotate(center: Vector3D, theta: number, phi: number) {
-    // Rotation matrix coefficients
-    const ct = Math.cos(theta);
-    const st = Math.sin(theta);
-    const cp = Math.cos(phi);
-    const sp = Math.sin(phi);
-
-    // Rotation
-    const x = this.x - center.x;
-    const y = this.y - center.y;
-    const z = this.z - center.z;
-
-    this.x = ct * x - st * cp * y + st * sp * z + center.x;
-    this.y = st * x + ct * cp * y - ct * sp * z + center.y;
-    this.z = sp * y + cp * z + center.z;
-
+  public static add(a: Vector3D, b: Vector3D): Vector3D {
+    return (new Vector3D(a.x, a.y, a.z)).add(b);
   }
+
+  public static sub(a: Vector3D, b: Vector3D): Vector3D {
+    return (new Vector3D(a.x, a.y, a.z)).sub(b);
+  }
+
+  public add(v: Vector3D): this {
+    this.x += v.x;
+    this.y += v.y;
+    this.z += v.z;
+    return this;
+  }
+
+  public sub(v: Vector3D): this {
+    this.x -= v.x;
+    this.y -= v.y;
+    this.z -= v.z;
+    return this;
+  }
+
+
+  public copy(): Vector3D {
+    return new Vector3D(this.x, this.y, this.z);
+  }
+
+  public toString(): string {
+    return `[${this.x}, ${this.y}, ${this.z}]`;
+  }
+
 }
