@@ -42,8 +42,18 @@
 </head>
 
 <body>
-  <button onClick="stopAnimation()">Stop</button><br/>
+  <div>
+    <button onClick="stopAnimation()">Stop</button>
+  </div>
+
+  <div>
   <canvas id="cnv" width="800" height="600"></canvas>
+  </div>
+
+  <div>
+    <input id="cam-dist" type="range" min="0" max="1000" defaultValue="200" onChange="sysApp.updateDist()" style="width: 800px"/>
+  </div>
+
 </body>
 
 </html>
